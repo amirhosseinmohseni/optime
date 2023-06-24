@@ -41,10 +41,11 @@ SYSTEM_APPS = [
 
 MY_APPS = [
     'accounts',
+    'api',
 ]
 
 THIRD_PARTY_APPS = [
-    
+    'rest_framework',
 ]
 
 INSTALLED_APPS = SYSTEM_APPS + MY_APPS + THIRD_PARTY_APPS
