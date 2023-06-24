@@ -47,6 +47,7 @@ MY_APPS = [
 
 THIRD_PARTY_APPS = [
     'rest_framework',
+    'drf_yasg',
 ]
 
 INSTALLED_APPS = SYSTEM_APPS + MY_APPS + THIRD_PARTY_APPS
