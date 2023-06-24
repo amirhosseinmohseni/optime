@@ -55,8 +55,8 @@ class CourierAdmin(BaseUserAdmin):
         User model.
     """
     model = User
-    list_display = ('phone', 'is_available', 'latitude', 'longitude')
-    list_filter = ('phone', 'is_available', 'latitude', 'longitude')
+    list_display = ('phone', 'is_available', 'latitude', 'longitude', 'is_available')
+    list_filter = ('phone', 'is_available', 'latitude', 'longitude', 'is_available')
     search_fields = ('phone', )
     ordering = ('created_date', )
     readonly_fields = ['created_date', 'updated_date', 'last_login']
@@ -65,6 +65,11 @@ class CourierAdmin(BaseUserAdmin):
             "fields": (
                 'phone',
                 'password',
+            ),
+        }),
+        ('Status', {
+            "fields": (
+                'is_available',
             ),
         }),
         ('Important Dates', {
@@ -78,7 +83,7 @@ class CourierAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             "classes": ("wide",),
-            "fields": ("phone", "password1", "password2", "latitude", "longitude")
+            "fields": ("phone", "password1", "password2", "latitude", "longitude",)
         }),
     )
 

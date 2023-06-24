@@ -42,6 +42,7 @@ SYSTEM_APPS = [
 MY_APPS = [
     'accounts',
     'api',
+    'actions',
 ]
 
 THIRD_PARTY_APPS = [
