@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from django.contrib.auth.hashers import make_password
 from math import radians, sin, cos, sqrt, atan2
+from django.shortcuts import redirect
 
 
 class CourierList(generics.ListCreateAPIView):
@@ -93,6 +94,11 @@ class MyMissionList(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     
     def get(self, request):
+        """
+            if user that send a request is admin, redirect to all missions list and if not direct to my-mission list page
+        """
+        if request.user.is_superuser:
+            return redirect('api-v1:mission-list')
         queryset = self.queryset.filter(courier__phone=request.user)
         serializer = MissionSerializer(queryset, many=True)
         return Response(serializer.data)
