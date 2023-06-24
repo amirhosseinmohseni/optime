@@ -7,8 +7,8 @@ class Mission(models.Model):
     """
         Mission model is the model of mission and assign to an available courier
     """
-    courier = models.ForeignKey(Courier, on_delete=models.CASCADE, blank=True, null=True)
-    name = models.CharField(max_length=255)
+    courier = models.ForeignKey(Courier, on_delete=models.CASCADE, blank=True, null=True, limit_choices_to={'is_available': True})
+    name = models.CharField(max_length=255, unique=True)
     origin_latitude = models.DecimalField(max_digits=9, decimal_places=6)
     origin_longitude = models.DecimalField(max_digits=9, decimal_places=6)
     is_get = models.BooleanField(default=False)
