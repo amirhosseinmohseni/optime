@@ -3,7 +3,7 @@ from accounts.models import User, Courier
 from actions.models import Mission
 from rest_framework import generics
 from .serializers import CourierSerializer, MissionSerializer
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from django.contrib.auth.hashers import make_password
 from math import radians, sin, cos, sqrt, atan2
@@ -83,3 +83,16 @@ class MissionList(generics.ListCreateAPIView):
         radius = 6371
         distance = radius * c_value
         return distance
+    
+class MyMissionList(generics.ListAPIView):
+    """
+        this view is for courier to see his missions with get method 
+    """
+    queryset = Mission.objects.all()
+    serializer_class = MissionSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request):
+        queryset = self.queryset.filter(courier__phone=request.user)
+        serializer = MissionSerializer(queryset, many=True)
+        return Response(serializer.data)

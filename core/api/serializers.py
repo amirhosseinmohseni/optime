@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 class CourierSerializer(serializers.ModelSerializer):
     """
-        this serializer is for admin to see list of all couriers 
+        this serializer is for see list of all couriers 
     """
     class Meta:
         model = Courier
@@ -13,7 +13,7 @@ class CourierSerializer(serializers.ModelSerializer):
         
 class MissionSerializer(serializers.ModelSerializer):
     """
-        this serializer is for admin to see list of missions and show available couriers 
+        this serializer is for see list of missions and for admin create show available couriers
     """
     courier = serializers.PrimaryKeyRelatedField(
         queryset=Courier.objects.filter(is_available=True)
@@ -23,3 +23,4 @@ class MissionSerializer(serializers.ModelSerializer):
         model = Mission
         fields = ('pk', 'courier', 'name', 'origin_latitude', 'origin_longitude', 'destination_latitude', 'destination_longitude', 'is_get', 'start_time', 'done', 'done_time')
         read_only_fields = ('is_get', 'start_time', 'done', 'done_time')
+        
